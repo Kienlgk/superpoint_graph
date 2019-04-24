@@ -1,0 +1,26 @@
+conda install -c anaconda future
+conda install -c conda-forge python-igraph
+conda install -c conda-forge tqdm
+conda install -c owlas transforms3d
+pip install pynvrtc
+conda install -c anaconda fastrlock
+conda install -c anaconda cupy
+conda install -c anaconda h5py
+conda install scikit-learn
+pip install plyfile
+
+conda install -c anaconda boost
+conda install -c omnia eigen3
+conda install eigen
+conda install -c r libiconv
+
+export CONDAENV="/home/na/anaconda3/envs/pytorch/bin:/home/na/anaconda3/envs/pytorch:$CONDAENV"
+
+
+worked:
+export CONDAENV="/home/na/anaconda3/envs/pytorch"
+cmake . -DPYTHON_LIBRARY=$CONDAENV/lib/libpython3.7m.so -DPYTHON_INCLUDE_DIR=$CONDAENV/include/python3.7m -DBOOST_INCLUDEDIR=/home/na/anaconda3/envs/pytorch/include/boost -DEIGEN3_INCLUDE_DIR=$CONDAENV/include/eigen3 -DBOOST_ROOT=/home/na/anaconda3/envs/pytorch/include
+
+
+
+cmake . -DPYTHON_LIBRARY=$CONDAENV/lib/libpython3.7m.so -DPYTHON_INCLUDE_DIR=$CONDAENV/include/python3.7m -DBOOST_INCLUDEDIR=$CONDAENV/include/boost -DEIGEN3_INCLUDE_DIR=$CONDAENV/include/eigen3 -DBOOST_ROOT=/home/na/anaconda3/envs/pytorch/include
