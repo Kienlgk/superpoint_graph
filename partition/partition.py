@@ -34,7 +34,8 @@ args = parser.parse_args()
 root = args.ROOT_PATH+'/'
 #list of subfolders to be processed
 if args.dataset == 's3dis':
-    folders = ["Area_1/", "Area_2/", "Area_3/", "Area_4/", "Area_5/", "Area_6/"]
+    # folders = ["Area_1/", "Area_2/", "Area_3/", "Area_4/", "Area_5/", "Area_6/"]
+    folders = ["Area_5/", "Area_6/"]
     n_labels = 13
 elif args.dataset == 'sema3d':
     folders = ["test_reduced/", "test_full/", "train/"]
@@ -120,8 +121,14 @@ for folder in folders:
             #--- read the data files and compute the labels---
             if args.dataset=='s3dis':
                 xyz, rgb, labels = read_s3dis_format(data_file)
+                print(xyz.shape)
+                print(rgb.shape)
+                print(labels.shape)
                 if args.voxel_width > 0:
                     xyz, rgb, labels = libply_c.prune(xyz, args.voxel_width, rgb, labels, n_labels)
+                    print(xyz.shape)
+                    print(rgb.shape)
+                    print(labels.shape)
             elif args.dataset=='sema3d':
                 label_file = data_folder + file_name + ".labels"
                 has_labels = (os.path.isfile(label_file))
@@ -146,11 +153,28 @@ for folder in folders:
             start = timer()
             #---compute 10 nn graph-------
             graph_nn, target_fea = compute_graph_nn_2(xyz, args.k_nn_adj, args.k_nn_geof)
+            print("source:", graph_nn["source"].shape)
+            print("target:", graph_nn["target"].shape)
+            print("distance:", graph_nn["distances"].shape)
+
+            print(target_fea.shape)
             #---compute geometric features-------
             geof = libply_c.compute_geof(xyz, target_fea, args.k_nn_geof).astype('float32')
+            # print(geof['linearity'].shape)
+            # print(geof['planarity'].shape)
+            # print(geof['scattering'].shape)
+            # print(geof['verticality'].shape)
+            print('linearity', geof[:,0].shape)
+            print(geof[:,0])
+            print('planarity', geof[:,1].shape)
+            print('scattering', geof[:,2].shape)
+            print('verticality', geof[:,3].shape)
+
             end = timer()
             times[0] = times[0] + end - start
             del target_fea
+            exit()
+
             write_features(fea_file, geof, xyz, rgb, graph_nn, labels)
         #--compute the partition------
         sys.stdout.flush()
