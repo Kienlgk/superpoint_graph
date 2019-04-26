@@ -1,18 +1,21 @@
-conda install -c anaconda future
-conda install -c conda-forge python-igraph
-conda install -c conda-forge tqdm
-conda install -c owlas transforms3d
+conda install pytorch torchvision cudatoolkit=9.0 -c pytorch
+
+conda install -y -c anaconda future
+conda install -y -c conda-forge python-igraph
+conda install -y -c conda-forge tqdm
+# conda install -y -c owlas transforms3d
+pip install transforms3d
 pip install pynvrtc
-conda install -c anaconda fastrlock
-conda install -c anaconda cupy
-conda install -c anaconda h5py
-conda install scikit-learn
+conda install -y -c anaconda fastrlock
+conda install -y -c anaconda cupy
+conda install -y -c anaconda h5py
+conda install -y scikit-learn
 pip install plyfile
 
-conda install -c anaconda boost
-conda install -c omnia eigen3
-conda install eigen
-conda install -c r libiconv
+conda install -y -c anaconda boost
+conda install -y -c omnia eigen3
+conda install -y eigen
+conda install -y -c r libiconv
 
 export CONDAENV="/home/na/anaconda3/envs/pytorch/bin:/home/na/anaconda3/envs/pytorch:$CONDAENV"
 
@@ -21,6 +24,10 @@ worked:
 export CONDAENV="/home/na/anaconda3/envs/pytorch"
 cmake . -DPYTHON_LIBRARY=$CONDAENV/lib/libpython3.7m.so -DPYTHON_INCLUDE_DIR=$CONDAENV/include/python3.7m -DBOOST_INCLUDEDIR=/home/na/anaconda3/envs/pytorch/include/boost -DEIGEN3_INCLUDE_DIR=$CONDAENV/include/eigen3 -DBOOST_ROOT=/home/na/anaconda3/envs/pytorch/include
 
-
+export CONDAENV="/home/kien/miniconda3/envs/pytorch"
+cmake . -DPYTHON_LIBRARY=$CONDAENV/lib/libpython3.7m.so -DPYTHON_INCLUDE_DIR=$CONDAENV/include/python3.7m -DBOOST_INCLUDEDIR=$CONDAENV/include/boost -DEIGEN3_INCLUDE_DIR=$CONDAENV/include/eigen3 -DBOOST_ROOT=$CONDAENV/include
 
 cmake . -DPYTHON_LIBRARY=$CONDAENV/lib/libpython3.7m.so -DPYTHON_INCLUDE_DIR=$CONDAENV/include/python3.7m -DBOOST_INCLUDEDIR=$CONDAENV/include/boost -DEIGEN3_INCLUDE_DIR=$CONDAENV/include/eigen3 -DBOOST_ROOT=/home/na/anaconda3/envs/pytorch/include
+
+
+conda install pytorch torchvision cudatoolkit=9.0 -c pytorch future python-igraph tqdm transforms3d fastrlock cupy h5py scikit-learn boost eigen3 eigen libiconv

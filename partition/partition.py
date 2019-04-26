@@ -7,6 +7,7 @@
 import os.path
 import sys
 import numpy as np
+import numpy.matlib
 import argparse
 from timeit import default_timer as timer
 sys.path.append("./partition/cut-pursuit/src")
